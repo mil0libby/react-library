@@ -1,19 +1,18 @@
 import React from "react";
-import Book from "./ui/Book";
 import { books } from "../data";
+import Book from "./ui/Book";
 
-export default function Features() {
+export default function Discounted() {
   return (
-    <section id="features">
+    <section id="recent">
       <div className="container">
         <div className="row">
           <h2 className="section__title">
-            Featured <span className="purple">Books</span>
+            Discount <span className="purple">Books</span>
           </h2>
           <div className="books">
             {books
-              .filter((book) => book.rating == 5)
-              .slice(0, 4)
+              .filter((book) => book.salePrice)
               .map((book) => (
                 <Book key={book.id} book={book}></Book>
               ))}
