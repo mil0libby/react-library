@@ -6,7 +6,19 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import { books } from "./data";
 import BookInfo from "./pages/BookInfo";
+import Cart from "./pages/Cart";
+import { useEffect, useState } from "react";
 function App() {
+  const [cart, setCart] = useState([]);
+
+  function addToCart(book) {
+    setCart([...cart, book]);
+  }
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
+
   return (
     <Router>
       <div className="App">
@@ -18,9 +30,12 @@ function App() {
           render={() => <Books books={books}></Books>}
         ></Route>
         <Route
-          path="/books/1"
-          render={() => <BookInfo books={books}></BookInfo>}
+          path="/books/:id"
+          render={() => (
+            <BookInfo books={books} add={addToCart} cart={cart}></BookInfo>
+          )}
         ></Route>
+        <Route path="/cart" render={() => <Cart books={cart}></Cart>}></Route>
 
         <Footer></Footer>
       </div>
